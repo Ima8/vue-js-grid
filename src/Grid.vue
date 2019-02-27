@@ -9,7 +9,7 @@
               :row-count="rowCount"
               :cell-width="cellWidth"
               :cell-height="cellHeight"
-              :window-width="windowWidth"
+              :window-width="gridResponsiveWidth"
               :row-shift="rowShift"
               @dragstart="onDragStart"
               @dragend="onDragEnd"
@@ -41,7 +41,8 @@ export default {
     },
     gridWidth: {
       type: Number,
-      default: -1
+      required: true,
+      default: 421,
     },
     cellWidth: {
       type: Number,
@@ -88,25 +89,22 @@ export default {
     }
   },
   computed: {
-    gridResponsiveWidth () {
-      if (this.gridWidth < 0) {
-        return this.windowWidth
-      } else {
-        return Math.min(this.windowWidth, this.gridWidth)
-      }
-    },
-
     height () {
       return Math.ceil(this.items.length / this.rowCount) *
         this.cellHeight
     },
-
     style () {
       return {
         height: this.height + 'px'
       }
     },
-
+    gridResponsiveWidth() {
+      if(this.gridWidth < 0) {
+        return 320
+      } else {
+        return this.gridWidth
+      }
+    },
     rowCount () {
       return Math.floor(this.gridResponsiveWidth / this.cellWidth)
     },
@@ -236,7 +234,12 @@ export default {
   }
 }
 </script>
-<style>
+<style lang="css">
+body {
+  margin: 0;
+  padding: 0;
+}
+
 .v-grid {
   display: block;
   position: relative;

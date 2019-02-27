@@ -1,23 +1,23 @@
 export default {
-  data () {
+  data() {
     return {
       windowHeight: 0,
       windowWidth: 0
     }
   },
-  created () {
+  created() {
     window.addEventListener('resize', this.getWindowSize)
     this.getWindowSize()
   },
-  mounted () {
+  mounted() {
     this.getWindowSize()
   },
-  beforeDestroy () {
+  beforeDestroy() {
     window.removeEventListener('resize', this.getWindowSize)
   },
 
   methods: {
-    getWindowSize () {
+    getWindowSize() {
       if (this.$el) {
         this.windowHeight = this.$el.clientHeight
         this.windowWidth = this.$el.clientWidth
